@@ -1,0 +1,91 @@
+// kiểu dữ liệu biến trong TS
+let name: string = "Daniel"
+let age: number = 20
+let sleep: boolean = true
+let myProject: string[] = ["project1", "project2"]
+
+// 1. kiểu dữ liệu object
+// cách 1:
+let student: {
+  name: string;
+  age: number;
+} = {
+  name: "Daniel",
+  age: 20,
+};
+
+// cách 2:
+type Student = {
+  name: string;
+  age: number;
+}
+let student: Student = {
+  name: "Daniel",
+  age: 20,
+};
+
+// cách 3:
+interface StudentIF {
+  name: string;
+  age: number;
+}
+let student: StudentIF = {
+  name: "Daniel",
+  age: 20,
+};
+
+==> type với interface khác nhau chỉ về phần syntax nhưng rất nhỏ, không đáng kể
+- type: không thể extend thên property mới
+- interface: có thể extend thên property mới
+
+
+// 2. tạo function
+const printSomething:() => void = () => {
+  console.log('hello');
+}
+
+const returnSomething:() => string = () => {
+  let name:string = "Daniel"
+  return name
+}
+
+const returnManythings:() => string[] = () => {
+  let name:string[] = ["A", "B"]
+  return name
+}
+
+
+// 3. kế thừa type
+type Name = {
+  name: string
+}
+// type StudentDetail sẽ kế thừa name:string từ type Name
+type StudentDetail = Name & {
+  age: number,
+  address?: string
+}
+// vì vậy khi khai báo student p đủ cả 3 property: name, age, address (nếu ko sẽ báo lỗi thiếu property)
+// nhưng nếu có dấu ? ở thuộc tính nào thì property đó có thể có hoặc không
+let student: StudentDetail = {
+  name: "Daniel",
+  age: 20,
+  address: "HCM"
+}
+
+
+// 4. kế thừa interface
+interface NameIF {
+  name: string
+}
+// interface StudentDetailIF sẽ kế thừa name:string từ interface NameIF
+interface StudentDetailIF extends NameIF {
+  age: number,
+  address?: string
+}
+// vì vậy khi khai báo student p đủ cả 3 property: name, age, address (nếu ko sẽ báo lỗi thiếu property)
+// nhưng nếu có dấu ? ở thuộc tính nào thì property đó có thể có hoặc không
+let student: StudentDetailIF = {
+  name: "Daniel",
+  age: 20
+}
+
